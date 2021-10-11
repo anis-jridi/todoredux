@@ -7,17 +7,22 @@ import { editTask } from '../redux/action'
 const Edit = ({ task }) => {
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleShow = (e) => {
+    setShow(true);
+    e.preventDefault();
+  };
 
-  const [consto, setConsto] = useState(task.Description)
+  const [consto, setConsto] = useState(task.Description);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   return (
     <div>
-<button className="button" variant="primary"
-        onClick={handleShow}> EDIT</button>
+      <button className="button" variant="primary" onClick={handleShow}>
+        {" "}
+        EDIT
+      </button>
 
-      
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>EDIT</Modal.Title>
@@ -26,7 +31,7 @@ const Edit = ({ task }) => {
           type="text"
           value={consto}
           onChange={(e) => setConsto(e.target.value)}
-        ></input>{' '}
+        ></input>{" "}
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             close
@@ -34,8 +39,8 @@ const Edit = ({ task }) => {
           <Button
             variant="primary"
             onClick={() => {
-              dispatch(editTask(task.id, consto))
-              handleClose()
+              dispatch(editTask(task.id, consto));
+              handleClose();
             }}
           >
             Save
@@ -43,7 +48,7 @@ const Edit = ({ task }) => {
         </Modal.Footer>
       </Modal>
     </div>
-  )
+  );
 }
 
 export default Edit
